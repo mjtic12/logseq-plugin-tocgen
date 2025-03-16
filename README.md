@@ -23,17 +23,12 @@ Check the plugin settings for customization options.
 ## Usage Demonstration
 
 ### Scenario 0: Right-click Menu
-
-
-
-[https://user-images.githubusercontent.com/3410293/216609543-9edcf0de-6a87-441a-a599-0b50511bb713.mp4](https://user-images.githubusercontent.com/3410293/216609543-9edcf0de-6a87-441a-a599-0b50511bb713.mp4)
-
+https://user-images.githubusercontent.com/3410293/216609543-9edcf0de-6a87-441a-a599-0b50511bb713.mp4
 ### Scenario 1: Dynamic TOC
 
-[https://user-images.githubusercontent.com/3410293/196385678-ba12ad05-6729-4909-b527-83f5d062fd07.mp4](https://user-images.githubusercontent.com/3410293/196385678-ba12ad05-6729-4909-b527-83f5d062fd07.mp4)
+https://user-images.githubusercontent.com/3410293/196385678-ba12ad05-6729-4909-b527-83f5d062fd07.mp4
 
 ### Scenario 2: Inline TOC
-
 
 
 ### Support for Embedded Block/Page TOC Generation
