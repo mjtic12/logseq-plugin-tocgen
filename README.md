@@ -1,115 +1,108 @@
-中文 | [English](README.en.md)
-
 # logseq-plugin-tocgen
+Generate a table of contents (TOC) for any page or block, allowing quick access to content. Additionally, it provides buttons to scroll to the top and bottom of the page. The TOC is generated based on block hierarchy.
+
+_This is a fork of the minimized version since the original author (https://github.com/sethyuan/) unfortunately deleted all of his excellent Logseq plugins._
+
+## Features
+
+- Automatically syncs with content
+- Shift-click to open in the sidebar
+- Multiple expand/collapse options
+- Hold Alt and click the arrow to expand/collapse all descendants
+- Real-time tracking of the editing position with TOC highlighting
+- Fully supports embedded blocks and pages
+- Drag and drop to manage document structure within the TOC
+- Dynamic TOC that updates with changes in the main editing page
+- Fixed-height TOC that scrolls with the page content
+- Quickly open the TOC in the sidebar via the page menu or toolbar
+- Optional buttons to quickly return to the top or bottom of the page
+- Option to automatically return to the top when switching pages or to the last position when revisiting
+
+Check the plugin settings for customization options.
+
+## Usage Demonstration
+
+### Scenario 0: Right-click Menu
 
 
 
+[https://user-images.githubusercontent.com/3410293/216609543-9edcf0de-6a87-441a-a599-0b50511bb713.mp4](https://user-images.githubusercontent.com/3410293/216609543-9edcf0de-6a87-441a-a599-0b50511bb713.mp4)
+
+### Scenario 1: Dynamic TOC
+
+[https://user-images.githubusercontent.com/3410293/196385678-ba12ad05-6729-4909-b527-83f5d062fd07.mp4](https://user-images.githubusercontent.com/3410293/196385678-ba12ad05-6729-4909-b527-83f5d062fd07.mp4)
+
+### Scenario 2: Inline TOC
 
 
 
+### Support for Embedded Block/Page TOC Generation
 
 
 
+The demonstration above uses the [Another Embed](https://github.com/sethyuan/logseq-plugin-another-embed) plugin, which is recommended. The script for shortening namespaces is part of my `custom.js`, available [here](https://gist.github.com/sethyuan/4ea9ed4305d0145ad565b2128ae6cef4).
 
+## Usage Examples
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-生成任一页面/块的目录，通过它你可以快速访问页面/块内容。同时提供了滚动回页面顶部和底部的功能。注意目录是根据块层级来生成的。
-
-## 功能展示
-
-- 自动与内容同步
-- Shift 点击可在侧边栏打开
-- 多种展开收起方式
-- 按住 Alt 点击箭头可展开收起全部子孙
-- 实时追踪编辑位置并在目录上高亮展示
-- 完美支持嵌入块、嵌入页
-- 可在目录上通过拖拽来管理文档结构
-- 跟随主编辑页面变化的动态目录
-- 会跟随页面内容滚动的固定高度目录
-- 通过页面菜单或工具栏快速在侧边栏打开目录
-- 快速回到页面顶部、底部的按钮（可选）
-- 切换页面时自动回到顶部或页面离开时的位置（可选设置）
-
-具体设置可打开插件设置查看。
-
-## 使用展示
-
-### 场景零，右键菜单
-
-![image](https://user-images.githubusercontent.com/3410293/230697775-bcca87fd-64a3-4c5c-9fc0-5f166fcedf59.png)
-
-https://user-images.githubusercontent.com/3410293/216609543-9edcf0de-6a87-441a-a599-0b50511bb713.mp4
-
-### 场景一，动态目录
-
-https://user-images.githubusercontent.com/3410293/196385678-ba12ad05-6729-4909-b527-83f5d062fd07.mp4
-
-### 场景二，页面内目录
-
-![demo](demo_inline_toc.gif)
-
-### 支持生成嵌入块/页面的目录
-
-![demo](demo_embed.gif)
-
-上面的演示用到了 [Another Embed](https://github.com/sethyuan/logseq-plugin-another-embed) 插件，推荐大家尝试。缩短 namespace 的效果的脚本是我写的 `custom.js` 的一部分，代码可在[这里](https://gist.github.com/sethyuan/4ea9ed4305d0145ad565b2128ae6cef4)获取。
-
-## 使用示例
-
-如果你想生成一个随当前浏览页面变动而变动的 TOC，你可以传`*`作为页面名。推荐。
+To generate a TOC that dynamically updates based on the current page:
 
 ```
 {{renderer :tocgen2, *}}
+```
 
-指定目录高度，这样目录内容就会随页面内容滚动了。高度单位符合CSS规范。`auto` 代表不固定高度，高度取决于内容。
+To specify a fixed TOC height, making it scroll with the page content (CSS-compliant units, `auto` for dynamic height):
+
+```
 {{renderer :tocgen2, *, auto}}
 {{renderer :tocgen2, *, 300px}}
 ```
 
+To generate a TOC for the current page:
+
 ```
-为块所在的页面生成TOC。
 {{renderer :tocgen2}}
 {{renderer :tocgen2, [[]]}}
+```
 
-为某一页面创建一个TOC，可以用 "[[" 辅助查找想要的页面。
+To create a TOC for a specific page (use `[[` to search for a page):
+
+```
 {{renderer :tocgen2, pagename}}
 {{renderer :tocgen2, [[pagename]]}}
+```
 
-你也可以为某一页面块创建一个TOC，直接将块引用粘贴进来就好。
+To generate a TOC for a specific block, paste its reference:
+
+```
 {{renderer :tocgen2, ((block-reference))}}
+```
 
-可以指定要生成几级。
+To specify TOC depth levels:
+
+```
 {{renderer :tocgen2, [[]], auto, 2}}
 {{renderer :tocgen2, [[pagename]], auto, 2}}
 {{renderer :tocgen2, ((block-reference)), auto, 2}}
+```
 
-如果你想在TOC中只包含H1-Hn（h）这种heading，即markdown的`#`至`######`，
-或者指定任何内容都可以作为heading使用（any），
-那么你可以再通过一个参数来详细指定。
+To include only Markdown headings (H1-Hn, `h`) or any block as a heading (`any`):
+
+```
 {{renderer :tocgen2, [[page name]], auto, 1, h}}
 {{renderer :tocgen2, [[page name]], auto, 1, any}}
 ```
 
-如果有某一块你不想列入 TOC 之中，那么你可以通过为其指定一个 `toc:: no` 块属性。
+To exclude a block from the TOC, add the `toc:: no` property to the block.
 
-## 自定义样式
+## Custom Styles
 
-你可以通过以下几个 CSS 类来自定义样式，`kef-tocgen-page` 对应页面，`kef-tocgen-block` 对应块，`.kef-tocgen-active-block` 对应编辑中的块。参照 Logseq 自定义样式的文档操作，将内容放在`custom.css`中即可。
+Customize styles using the following CSS classes:
+
+- `.kef-tocgen-page` for pages
+- `.kef-tocgen-block` for blocks
+- `.kef-tocgen-active-block` for the currently edited block
+
+Add custom styles in `custom.css`:
 
 ```css
 .kef-tocgen-page {
@@ -125,7 +118,7 @@ https://user-images.githubusercontent.com/3410293/196385678-ba12ad05-6729-4909-b
 }
 ```
 
-你也可以通过`kef-tocgen-noactivepage`来自定义动态 TOC（见使用示例）在没有检测到活动页面时的内容与样式。
+You can also customize the dynamic TOC’s appearance when no active page is detected using `.kef-tocgen-noactivepage`:
 
 ```css
 .kef-tocgen-noactivepage::before {
@@ -133,8 +126,9 @@ https://user-images.githubusercontent.com/3410293/196385678-ba12ad05-6729-4909-b
 }
 ```
 
-## Buy me a coffee
+## Buy ~~me~~/him a coffee
 
-如果您认为我所开发的软件对您有所帮助，并且愿意给予肯定和支持，不妨扫描下方的二维码进行打赏。感谢您的支持与关注。
+If you find this plugin helpful and would like to support its development, consider making a donation by scanning the QR codes below. Thank you for your support!
 
 ![wx](https://user-images.githubusercontent.com/3410293/236807219-cf21180a-e7f8-44a9-abde-86e1e6df999b.jpg) ![ap](https://user-images.githubusercontent.com/3410293/236807256-f79768a7-16e0-4cbf-a9f3-93f230feee30.jpg)
+
